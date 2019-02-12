@@ -1,31 +1,46 @@
-package com.fxymine4ever.main.imageloader.strategy;
+package com.fxymine4ever.main.imageloader.strategy.compress;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.ImageView;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 /**
  * create by:Fxymine4ever
- * time: 2019/2/5
- * 图片压缩，利用Bitmap的采样率
+ * time: 2019/2/12
+ * 通过采样率来压缩
  */
-public class ImageResizer {
+public class ResizeCompress implements ImageCompress {
+    private static ResizeCompress instance;
 
-    public static Bitmap resizeBitmap(Bitmap bitmap, ImageView imageView) {
+    public static ResizeCompress getInstance(){
+        if(instance == null){
+            synchronized (ResizeCompress.class){
+                if(instance == null){
+                    instance =  new ResizeCompress();
+                }
+            }
+        }
+        return instance;
+    }
+
+    private ResizeCompress() {
+    }
+
+    @Override
+    public Bitmap compress(Bitmap bitmap, int width, int height) {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        options.inSampleSize = calculateInSampleSize(options, imageView.getWidth(), imageView.getHeight());
+        options.inSampleSize = calculateInSampleSize(options, width, height);
         options.inJustDecodeBounds = false;
         ByteArrayInputStream is = new ByteArrayInputStream(out.toByteArray());
         return BitmapFactory.decodeStream(is, null, options);
     }
 
-    private static int calculateInSampleSize(BitmapFactory.Options options,
+    private int calculateInSampleSize(BitmapFactory.Options options,
                                              int reqWidth, int reqHeight) {
         if (reqHeight == 0 || reqWidth == 0)
             return 1;

@@ -6,6 +6,7 @@ import java.io.IOException;
 /**
  * create by:Fxymine4ever
  * time: 2019/2/12
+ * 关闭IO流工具类
  */
 public class CloseUtil {
     public static void close(Closeable close){

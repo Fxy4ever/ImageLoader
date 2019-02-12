@@ -13,14 +13,14 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.fxymine4ever.main.imageloader.start.ImageLoader.TAG;
+import static com.fxymine4ever.main.imageloader.ImageLoader.TAG;
 
 /**
  * create by:Fxymine4ever
  * time: 2019/2/12
+ * 利用OkHttp或者HttpURLConnection获取Bitmap
  */
 public class NetUtil {
-    private static final int IO_BUFFER_SIZE = 8 * 1024;
     private static OkHttpClient client = new OkHttpClient();
 
     public static Bitmap downloadBitmapFromUrl(String path) {

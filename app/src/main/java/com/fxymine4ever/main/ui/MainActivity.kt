@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.StaggeredGridLayoutManager
 import com.fxymine4ever.imageloader.R
-import com.fxymine4ever.main.imageloader.start.ImageLoader
-import com.fxymine4ever.main.imageloader.strategy.cache.DoubleCache
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
