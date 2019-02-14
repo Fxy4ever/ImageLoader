@@ -1,5 +1,5 @@
 # ImageLoader
-对三级缓存进行了封装解耦<br>
+对三级缓存进行了封装解耦(未完待续 <br>
 使用如下
 ```java
         RequestOptions options = new RequestOptions()
