@@ -57,13 +57,6 @@ public class DoubleCache implements ImageCache {
             put(url, bitmap);//关闭应用后，内存被清空，此时应该再次存在内存中
             return bitmap;
         }
-
-        bitmap = NetUtil.downloadBitmapFromUrlWithOkHttp(url);
-        if (bitmap != null) {
-            Bitmap fixedBitmap = ResizeCompress.getInstance().compress(bitmap, width, height);//压缩
-            put(url, fixedBitmap);
-            return fixedBitmap;
-        }
         return null;
     }
 }

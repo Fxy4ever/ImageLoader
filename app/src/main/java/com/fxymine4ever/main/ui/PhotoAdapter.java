@@ -9,9 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.fxymine4ever.imageloader.R;
-import com.fxymine4ever.main.imageloader.ImageLoader;
+import com.fxymine4ever.main.imageloader.core.ImageLoader;
 import com.fxymine4ever.main.imageloader.config.RequestOptions;
 import com.fxymine4ever.main.imageloader.strategy.cache.DoubleCache;
+import com.fxymine4ever.main.imageloader.strategy.cache.MemoryCache;
 
 
 /**
@@ -36,12 +37,14 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        RequestOptions options = new RequestOptions()
+        RequestOptions options = new RequestOptions.Builder()
                 .url(urls[i])
-                .cache(DoubleCache.getInstance(context))
+                .cache(MemoryCache.getInstance())
                 .error(R.drawable.ic_launcher_background)
                 .placeHolder(R.drawable.ic_launcher_foreground)
-                .scaleType(ImageView.ScaleType.CENTER_CROP);
+                .scaleType(ImageView.ScaleType.CENTER_CROP)
+                .build();
+
         ImageLoader
                 .getInstance()
                 .with(context)

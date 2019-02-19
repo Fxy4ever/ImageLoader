@@ -10,7 +10,7 @@ import com.fxymine4ever.main.imageloader.util.CacheUtil;
 import com.fxymine4ever.main.imageloader.util.NetUtil;
 import com.jakewharton.disklrucache.DiskLruCache;
 
-import static com.fxymine4ever.main.imageloader.ImageLoader.TAG;
+import static com.fxymine4ever.main.imageloader.core.ImageLoader.TAG;
 
 /**
  * create by:Fxymine4ever
@@ -50,14 +50,6 @@ public class DiskCache implements ImageCache {
         if (bitmap != null) {
             Log.d(TAG, "load from disk");
             return bitmap;
-        }
-
-        bitmap = NetUtil.downloadBitmapFromUrlWithOkHttp(url);
-        if (bitmap != null) {
-            Log.d(TAG, "load from net");
-            Bitmap fixedBitmap = ResizeCompress.getInstance().compress(bitmap, width, height);//压缩
-            put(url, fixedBitmap);
-            return fixedBitmap;
         }
         return null;
     }

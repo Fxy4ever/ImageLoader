@@ -13,7 +13,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.fxymine4ever.main.imageloader.ImageLoader.TAG;
+import static com.fxymine4ever.main.imageloader.core.ImageLoader.TAG;
 
 /**
  * create by:Fxymine4ever

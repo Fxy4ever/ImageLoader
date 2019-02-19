@@ -1,4 +1,4 @@
-package com.fxymine4ever.main.imageloader;
+package com.fxymine4ever.main.imageloader.core;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,8 +24,9 @@ public class ImageLoader {
     private Executor THREAD_POOL_EXECUTOR = ExecutorFactory.createExecutor();
 
     private static ImageLoader imageLoader;
-    private RequestOptions options;//配置类
     private Context context;
+
+
 
     public static ImageLoader getInstance() {
         if (imageLoader == null) {
@@ -51,7 +52,7 @@ public class ImageLoader {
     /*
     异步加载图片
      */
-    public void load(RequestOptions options, ImageView imageView) {
+    public void load(RequestOptions options,ImageView imageView) {
         String tag = MD5Util.UrltoMd5(options.getUrl()) + System.currentTimeMillis();
 
         if (options.getPlaceHolder() > 0) {//占位图
@@ -60,11 +61,10 @@ public class ImageLoader {
         if (options.getType() != null) {//如果设置了ScaleType
             imageView.setScaleType(options.getType());
         }
-        imageView.setTag(TAG_KEY_URI, tag);
-        int[] res = ViewUtil.measureView(imageView);
-
         Runnable loadBitmapTask = () -> {
-            Bitmap bitmap1 = options.getCache().get(options.getUrl(), res[0], res[1]);
+            imageView.setTag(TAG_KEY_URI, tag);
+            int[] res = ViewUtil.measureView(imageView);
+            Bitmap bitmap1 = options.getLoader().load(options.getUrl(),options.getCache(), res[0], res[1]);
 
             if (bitmap1 != null) {
                 ((Activity) context).runOnUiThread(() -> {

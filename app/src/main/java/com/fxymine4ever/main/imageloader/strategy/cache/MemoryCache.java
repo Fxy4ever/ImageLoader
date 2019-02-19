@@ -44,11 +44,7 @@ public class MemoryCache implements ImageCache {
         if (bitmap != null) {
             return bitmap;
         }
-        bitmap = NetUtil.downloadBitmapFromUrlWithOkHttp(url);//下载
-        if (bitmap != null) {
-            put(url, bitmap);
-        }
-        return bitmap;
+        return null;
     }
 
 }
